@@ -8,6 +8,7 @@ import { MatListModule, MatToolbarModule } from '@angular/material';
 
 import { OktaAuthModule, OktaCallbackComponent } from '@okta/okta-angular';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 const appRoutes: Routes = [
   {
@@ -29,6 +30,7 @@ const config = {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     HttpClientModule,
     MatListModule, MatToolbarModule,
     RouterModule.forRoot(appRoutes),
