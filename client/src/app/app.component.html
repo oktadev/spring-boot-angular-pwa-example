@@ -2,4 +2,7 @@
   <span>Welcome to {{title}}!</span>
 </mat-toolbar>
 
-<app-beer-list></app-beer-list>
+<button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()"> Login </button>
+<div *ngIf="oktaAuth.isAuthenticated()">
+  <app-beer-list></app-beer-list>
+</div>
