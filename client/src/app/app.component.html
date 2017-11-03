@@ -2,7 +2,10 @@
   <span>Welcome to {{title}}!</span>
 </mat-toolbar>
 
+<router-outlet></router-outlet>
+
 <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()"> Login </button>
+<button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()"> Logout </button>
 <div *ngIf="oktaAuth.isAuthenticated()">
   <app-beer-list></app-beer-list>
 </div>
