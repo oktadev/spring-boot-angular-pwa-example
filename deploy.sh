@@ -50,11 +50,10 @@ cd $r/client
 rm -rf dist
 # replace the server URL in the client
 sed -i -e "s|http://localhost:8080|$serverUri|g" $r/client/src/app/shared/beer/beer.service.ts
-yarn && ng build --prod --aot
-# Fix filenames in sw.js
-python $r/sw.py
+yarn && ng build -prod --aot
 cd dist
 touch Staticfile
+echo "pushstate: enabled" >> Staticfile
 cf push pwa-client --no-start --random-route
 cf set-env pwa-client FORCE_HTTPS true
 cf start pwa-client
@@ -63,7 +62,7 @@ cf start pwa-client
 clientUri=https://`app_domain pwa-client`
 
 # replace the client URL in the server
-sed -i -e "s|http://localhost:4200|$clientUri|g" $r/server/src/main/java/com/example/beer/BeerController.java
+sed -i -e "s|http://localhost:4200|$clientUri|g" $r/server/src/main/java/com/example/demo/beer/BeerController.java
 
 # redeploy the server
 cd $r/server
@@ -74,7 +73,7 @@ cf push -p target/*jar pwa-server
 git checkout $r/client
 git checkout $r/server
 rm $r/client/src/app/shared/beer/beer.service.ts-e
-rm $r/server/src/main/java/com/example/beer/BeerController.java-e
+rm $r/server/src/main/java/com/example/demo/beer/BeerController.java-e
 
 # show apps and URLs
 cf apps
