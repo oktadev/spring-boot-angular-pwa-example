@@ -1,0 +1,6 @@
+{
+  "/good-beers": {
+    "target": "http://localhost:8080/good-beers",
+    "secure": false
+  }
+}
