@@ -8,4 +8,4 @@ To run the server, cd into the `server` folder and run `mvn spring-boot:run`.
 
 To run the client, cd into the `client` folder and run `npm install && ng serve`. Open <http://localhost:4200> to load initial data. Use Chrome Developer Tool to toggle offline in the Network tab and prove that it works offline.
 
-![Offline baby!](static/offline-works.png)
+![Offline baby!](https://developer.okta.com/assets/blog/angular-spring-boot-pwa/offline-works-826aa2c4b48e4f89625727872ad6ea0f857a990e2cb08491b7fe8de57e1b92e0.png)
