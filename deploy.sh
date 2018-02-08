@@ -40,7 +40,7 @@ cf a
 # Deploy the server
 cd $r/server
 mvn clean package
-cf push -p target/*jar pwa-server --no-start  --random-route
+cf push -p target/*jar pwa-server --no-start --random-route
 
 # Get the URL for the server
 serverUri=https://`app_domain pwa-server`
@@ -50,7 +50,7 @@ cd $r/client
 rm -rf dist
 # replace the server URL in the client
 sed -i -e "s|http://localhost:8080|$serverUri|g" $r/client/src/app/shared/beer/beer.service.ts
-yarn && ng build -prod --aot
+npm install && ng build --prod
 cd dist
 touch Staticfile
 echo "pushstate: enabled" >> Staticfile
@@ -70,8 +70,9 @@ mvn package -DskipTests
 cf push -p target/*jar pwa-server
 
 # cleanup changed files
-git checkout $r/client
-git checkout $r/server
+# Put the original server URL back in the client
+sed -i -e "s|$serverUri|http://localhost:8080|g" $r/client/src/app/shared/beer/beer.service.ts
+sed -i -e "s|$clientUri|http://localhost:4200|g" $r/server/src/main/java/com/example/demo/beer/BeerController.java
 rm $r/client/src/app/shared/beer/beer.service.ts-e
 rm $r/server/src/main/java/com/example/demo/beer/BeerController.java-e
 
